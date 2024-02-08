@@ -8,9 +8,18 @@ import easyocr
 
 
 ## if training on custom data is needed ##
-#dataset = 'data/label_test2.yaml'
+#import requests, zipfile
+#from io import BytesIO
+#url="https://syncandshare.desy.de/index.php/s/T5cKLKMHpSpWyaL/download/qr_code_dataset.zip"
+#url="https://syncandshare.desy.de/index.php/s/S7fALnrW296p9mZ/download/mock_optics.zip"
+#filename = url.split('/')[-1]
+#req = requests.get(url)
+#zipfile= zipfile.ZipFile(BytesIO(req.content))
+#zipfile.extractall('datasets/')
+## the training requires a yaml file with data information ##
+#dataset = 'data/qr_code.yaml'
 #backbone = YOLO("yolov8s.pt")  # load a pre-trained model (recommended for training)
-#results_train = backbone.train(data=dataset, epochs=120,name='label_test2')
+#results_train = backbone.train(data=dataset, epochs=120,name='qr_code')
 
 
 rl_model = YOLO('models/best.pt')
@@ -41,7 +50,8 @@ def write_csv(results, output_path):
 
         for frame_number in results.keys():
             for track_id in results[frame_number].keys():
-                if 'label' in results[frame_number][track_id].keys() and                    'read_label' in results[frame_number][track_id]['label'].keys():
+                if 'label' in results[frame_number][track_id].keys() and \
+                'read_label' in results[frame_number][track_id]['label'].keys():
                     f.write('{},{},{},{},{},{}\n'.format(
                         frame_number,
                         track_id,
@@ -75,7 +85,7 @@ while ret:
     frame_number += 1
     ret, frame = video.read()
 
-    if ret and frame_number < 1300:
+    if ret and frame_number < video.get(cv2.CAP_PROP_FRAME_COUNT):
         results[frame_number] = {}
         # label detector
         detections = rl_model.track(frame, persist=True,verbose=False)[0]

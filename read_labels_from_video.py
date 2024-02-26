@@ -80,6 +80,9 @@ size = (frame_width, frame_height)
 # Define the codec and create VideoWriter object
 fourcc = cv.VideoWriter_fourcc(*'DIVX')
 out = cv.VideoWriter('./outputs/processed.avi', fourcc, 20.0, size)
+# or if an mp4 file is preferred, use the following lines instead #
+# fourcc = cv.VideoWriter_fourcc(*'mp4v')
+# out = cv.VideoWriter('./outputs/processed.mp4', fourcc, 20.0, size)
 
 while ret:
     frame_number += 1

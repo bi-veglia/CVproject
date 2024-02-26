@@ -35,6 +35,10 @@ vid = cv.VideoCapture(1)
 #vid.set(4, 480)
 fourcc = cv.VideoWriter_fourcc(*'DIVX')
 out = cv.VideoWriter('./stream_detected.avi', fourcc, 20.0, (640, 480))
+# or if an mp4 file is preferred, use the following lines instead #
+# fourcc = cv.VideoWriter_fourcc(*'mp4v')
+# out = cv.VideoWriter('./outputs/processed.mp4', fourcc, 20.0, (640, 480))
+
 while(True): 
       
     # Capture the video frame 

@@ -1,0 +1,27 @@
+# YOLOv5 🚀 by Ultralytics, AGPL-3.0 license
+# COCO128 dataset https://www.kaggle.com/ultralytics/coco128 (first 128 images from COCO train2017) by Ultralytics
+# Example usage: python train.py --data coco128.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── yolo_dataset  ← downloads here (7 MB)
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path:  /home/veglia/beegfs/yolov5/datasets/opt_quad_qr/ # dataset root dir
+train: images/train  # train images (relative to 'path') 
+val: images/val # val images (relative to 'path') 
+test:  # test images (optional)
+
+# Classes
+nc: 7
+
+names:
+  0: source
+  1: camera
+  2: lens
+  3: calibration target
+  4: mirror
+  5: quadrupole
+  6: qr code
+
